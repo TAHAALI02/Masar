@@ -60,6 +60,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Masar.urls'
 
+AUTH_USER_MODEL = "Accounts.User"
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "live_map"
+LOGOUT_REDIRECT_URL = "login"
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

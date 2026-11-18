@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Masar</title>
+</head>
+<body>
+  {% if user.is_authenticated %}
+  <nav>
+    <a href="{% url 'live_map' %}">Live map</a>
+    <a href="{% url 'alerts' %}">Alerts</a>
+    <a href="{% url 'trip_history' %}">Trip history</a>
+
+    {% if user.is_fleet_manager %}
+        <a href="{% url 'reports' %}">Reports</a>
+        <a href="{% url 'user_list' %}">Users</a>
+    {% endif %}
+
+    <span>{{ user.username }} ({{ user.get_role_display }})</span>
+    <form method="post" action="{% url 'logout' %}" style="display:inline">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+    </form>
+  </nav>
+  {% endif %}
+
+  {% for message in messages %}
+    <p><strong>{{ message }}</strong></p>
+  {% endfor %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>
